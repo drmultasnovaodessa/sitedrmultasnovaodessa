@@ -80,17 +80,19 @@ export function Header({ onOpenDiagnostic }: HeaderProps) {
               href={BRAND.generalWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-zinc-900 border border-zinc-700 hover:border-yellow-400 hover:text-yellow-300 transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-zinc-900 border border-zinc-700 hover:border-yellow-400 hover:text-yellow-300 transition-all shadow-sm group"
+              aria-label="WhatsApp Dr Multas: (19) 97168-5849"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-400" />
-              <span>(19) 97168-5849</span>
+              <MessageCircle className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+              <span className="font-semibold text-zinc-300 group-hover:text-white">WhatsApp Dr Multas:</span>
+              <span className="font-bold text-white group-hover:text-yellow-400">(19) 97168-5849</span>
             </a>
 
             <a
               id="header-diagnostic-btn"
               href="#diagnostico"
               onClick={handleDiagnosticClick}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-black bg-yellow-400 hover:bg-yellow-300 shadow-md shadow-yellow-500/20 hover:shadow-yellow-500/40 transition-all active:scale-95 border-b-2 border-yellow-600"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-black bg-yellow-400 hover:bg-yellow-300 shadow-md shadow-yellow-500/20 hover:shadow-yellow-500/40 transition-all active:scale-95 border-b-2 border-yellow-600 hover:-translate-y-0.5"
             >
               <ShieldAlert className="w-4 h-4 text-black" />
               <span>Fazer Diagnóstico</span>

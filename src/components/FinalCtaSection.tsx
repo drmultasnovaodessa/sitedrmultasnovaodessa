@@ -49,7 +49,7 @@ export function FinalCtaSection({ onStartDiagnostic }: FinalCtaSectionProps) {
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-4.5 rounded-xl text-base font-bold text-white bg-zinc-950 border-2 border-zinc-700 hover:border-yellow-400 hover:text-yellow-300 transition-all transform active:scale-95 shadow-md"
               >
                 <MessageCircle className="w-5 h-5 text-emerald-400" />
-                <span>Falar pelo WhatsApp</span>
+                <span>WhatsApp Dr Multas</span>
               </a>
             </div>
           </div>

@@ -151,10 +151,14 @@ export function Hero({ onStartDiagnostic }: HeroProps) {
                 href={BRAND.generalWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-6 py-4.5 rounded-xl text-base font-bold text-white bg-zinc-900 border-2 border-zinc-700 hover:border-yellow-400 hover:text-yellow-300 transition-all transform active:scale-95 shadow-md"
+                className="inline-flex items-center justify-center gap-3 px-6 py-4.5 rounded-xl text-base font-bold text-white bg-zinc-900 border-2 border-zinc-700 hover:border-yellow-400 hover:text-yellow-300 transition-all transform active:scale-95 shadow-md group"
+                aria-label="WhatsApp Dr Multas - Fale com um especialista"
               >
-                <MessageCircle className="w-5 h-5 text-emerald-400" />
-                <span>Falar pelo WhatsApp</span>
+                <MessageCircle className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0" />
+                <div className="text-left leading-tight">
+                  <span className="block text-sm sm:text-base font-black text-white group-hover:text-yellow-300">WhatsApp Dr Multas</span>
+                  <span className="block text-[11px] font-medium text-zinc-400">Fale com um especialista</span>
+                </div>
               </a>
             </div>
 
