@@ -12,6 +12,7 @@ import {
   ClipboardList,
   AlertCircle,
   Paperclip,
+  Edit3,
 } from 'lucide-react';
 import { DiagnosticFormData, ServiceId } from '../types';
 import { BRAND, SERVICE_OPTIONS } from '../data/content';
@@ -19,11 +20,16 @@ import { BRAND, SERVICE_OPTIONS } from '../data/content';
 interface DiagnosticSectionProps {
   formData: DiagnosticFormData;
   setFormData: React.Dispatch<React.SetStateAction<DiagnosticFormData>>;
+  currentStep: number;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export function DiagnosticSection({ formData, setFormData }: DiagnosticSectionProps) {
-  // Step state: 1 (Seu nome), 2 (Como podemos ajudar?), 3 (Conte sua situação), 4 (Diagnóstico pronto / WhatsApp)
-  const [currentStep, setCurrentStep] = useState<number>(1);
+export function DiagnosticSection({
+  formData,
+  setFormData,
+  currentStep,
+  setCurrentStep,
+}: DiagnosticSectionProps) {
   const [errorMsg, setErrorMsg] = useState<string>('');
 
   const getServiceLabel = (serviceId: string) => {
@@ -52,6 +58,17 @@ export function DiagnosticSection({ formData, setFormData }: DiagnosticSectionPr
     return true;
   };
 
+  const handleNextFromStep1 = () => {
+    if (!validateStep(1)) return;
+    // If a service is already pre-selected, go directly to Step 3 (Describe situation)
+    // If no service was pre-selected, proceed to Step 2 (Choose service)
+    if (formData.servico) {
+      setCurrentStep(3);
+    } else {
+      setCurrentStep(2);
+    }
+  };
+
   const nextStep = () => {
     if (!validateStep(currentStep)) return;
     setCurrentStep((prev) => Math.min(prev + 1, 4));
@@ -59,7 +76,12 @@ export function DiagnosticSection({ formData, setFormData }: DiagnosticSectionPr
 
   const prevStep = () => {
     setErrorMsg('');
-    setCurrentStep((prev) => Math.max(prev - 1, 1));
+    if (currentStep === 3 && formData.servico) {
+      // Allow user to go to step 2 to change service if they want, or step 1
+      setCurrentStep(2);
+    } else {
+      setCurrentStep((prev) => Math.max(prev - 1, 1));
+    }
   };
 
   const handleReset = () => {
@@ -135,13 +157,21 @@ ${formData.descricao.trim()}
                   const isPassed = currentStep > stepIndex;
 
                   return (
-                    <div
+                    <button
                       key={s.num}
+                      type="button"
+                      onClick={() => {
+                        // Allow clicking to previously completed steps or current step
+                        if (stepIndex === 1 || (stepIndex === 2 && formData.nome.trim()) || (stepIndex === 3 && formData.nome.trim() && formData.servico)) {
+                          setErrorMsg('');
+                          setCurrentStep(stepIndex);
+                        }
+                      }}
                       className={`p-2.5 rounded-xl border text-center transition-all ${
                         isActive
-                          ? 'bg-yellow-400 border-yellow-400 text-black shadow-md'
+                          ? 'bg-yellow-400 border-yellow-400 text-black shadow-md font-black'
                           : isPassed
-                          ? 'bg-zinc-950 border-yellow-500/40 text-yellow-400'
+                          ? 'bg-zinc-950 border-yellow-500/40 text-yellow-400 cursor-pointer hover:border-yellow-400'
                           : 'bg-zinc-950 border-zinc-800 text-zinc-500'
                       }`}
                     >
@@ -149,7 +179,7 @@ ${formData.descricao.trim()}
                       <div className="text-[10px] sm:text-xs font-bold tracking-tight uppercase truncate">
                         {s.title}
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
@@ -178,6 +208,32 @@ ${formData.descricao.trim()}
                 </p>
               </div>
 
+              {/* Notice banner if a service was pre-selected from a service card */}
+              {formData.servico && (
+                <div className="p-3.5 rounded-xl bg-zinc-950 border-2 border-yellow-400/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-yellow-400 flex-shrink-0" />
+                    <div>
+                      <span className="text-xs text-zinc-400 font-medium">Serviço pré-selecionado: </span>
+                      <span className="text-xs font-black text-yellow-400 uppercase tracking-wide">
+                        {getServiceLabel(formData.servico)}
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setErrorMsg('');
+                      setCurrentStep(2);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-xs text-zinc-300 hover:text-yellow-400 underline font-bold transition-colors flex-shrink-0"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>Trocar serviço</span>
+                  </button>
+                </div>
+              )}
+
               <div>
                 <label htmlFor="input-nome" className="sr-only">
                   Qual é o seu nome?
@@ -194,7 +250,7 @@ ${formData.descricao.trim()}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
-                      nextStep();
+                      handleNextFromStep1();
                     }
                   }}
                   autoFocus
@@ -213,7 +269,7 @@ ${formData.descricao.trim()}
                 <button
                   id="diagnostic-step1-next"
                   type="button"
-                  onClick={nextStep}
+                  onClick={handleNextFromStep1}
                   className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-black uppercase tracking-wider text-black bg-yellow-400 hover:bg-yellow-300 shadow-lg shadow-yellow-500/20 transition-all active:scale-95 border-b-2 border-yellow-600"
                 >
                   <span>Próximo passo</span>
@@ -248,9 +304,9 @@ ${formData.descricao.trim()}
                         setFormData((prev) => ({ ...prev, servico: option.id as ServiceId }));
                         if (errorMsg) setErrorMsg('');
                       }}
-                      className={`p-4 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all flex items-center justify-between gap-2 ${
+                      className={`p-4 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all flex items-center justify-between gap-2 cursor-pointer ${
                         isSelected
-                          ? 'bg-yellow-400 border-yellow-400 text-black shadow-lg'
+                          ? 'bg-yellow-400 border-yellow-400 text-black shadow-lg ring-2 ring-yellow-400/30'
                           : 'bg-zinc-950 border-zinc-800 text-zinc-200 hover:border-yellow-400/50 hover:bg-zinc-900'
                       }`}
                     >
@@ -310,6 +366,34 @@ ${formData.descricao.trim()}
                 <p className="text-sm text-zinc-300">
                   Explique de forma resumida sua dúvida, autuação ou notificação recebida.
                 </p>
+              </div>
+
+              {/* Service & Name Summary Pill with quick Edit button */}
+              <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div>
+                    <span className="text-zinc-500">Nome: </span>
+                    <span className="font-bold text-white">{formData.nome || 'Não informado'}</span>
+                  </div>
+                  <span className="text-zinc-700">|</span>
+                  <div>
+                    <span className="text-zinc-500">Serviço: </span>
+                    <span className="font-bold text-yellow-400 bg-yellow-400/10 border border-yellow-400/30 px-2 py-0.5 rounded">
+                      {getServiceLabel(formData.servico)}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setErrorMsg('');
+                    setCurrentStep(2);
+                  }}
+                  className="inline-flex items-center gap-1 text-xs text-yellow-400 hover:text-yellow-300 underline font-bold transition-colors"
+                >
+                  <Edit3 className="w-3 h-3" />
+                  <span>Trocar serviço</span>
+                </button>
               </div>
 
               <div>

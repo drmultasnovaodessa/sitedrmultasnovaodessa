@@ -70,7 +70,16 @@ export function ServicesSection({ onSelectServiceForDiagnostic }: ServicesSectio
             <div
               key={service.id}
               id={`service-card-${service.id}`}
-              className="group relative rounded-2xl bg-zinc-900 border-2 border-zinc-800 hover:border-yellow-400 p-6 sm:p-7 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-yellow-500/10 hover:-translate-y-1.5"
+              role="button"
+              tabIndex={0}
+              onClick={() => onSelectServiceForDiagnostic(service.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectServiceForDiagnostic(service.id);
+                }
+              }}
+              className="group relative rounded-2xl bg-zinc-900 border-2 border-zinc-800 hover:border-yellow-400 p-6 sm:p-7 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-yellow-500/10 hover:-translate-y-1.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400"
             >
               <div>
                 {/* Top Badge & Icon */}
@@ -98,8 +107,11 @@ export function ServicesSection({ onSelectServiceForDiagnostic }: ServicesSectio
               <div className="pt-6 mt-6 border-t border-zinc-800">
                 <button
                   type="button"
-                  onClick={() => onSelectServiceForDiagnostic(service.id)}
-                  className="w-full inline-flex items-center justify-between py-2.5 px-3.5 rounded-xl text-xs font-black uppercase tracking-wider text-black bg-yellow-400 group-hover:bg-yellow-300 transition-all shadow-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelectServiceForDiagnostic(service.id);
+                  }}
+                  className="w-full inline-flex items-center justify-between py-2.5 px-3.5 rounded-xl text-xs font-black uppercase tracking-wider text-black bg-yellow-400 group-hover:bg-yellow-300 transition-all shadow-sm active:scale-95"
                 >
                   <span>Analisar meu caso de {service.title}</span>
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />

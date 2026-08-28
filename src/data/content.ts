@@ -78,15 +78,15 @@ export const SERVICES: ServiceItem[] = [
 ];
 
 export const SERVICE_OPTIONS = [
-  { id: 'recurso-multa', label: 'Recurso de multa' },
+  { id: 'recurso-multa', label: 'Recursos de multas' },
   { id: 'analise-multa', label: 'Análise de multa' },
   { id: 'lei-seca', label: 'Lei Seca' },
   { id: 'suspensao-cnh', label: 'Suspensão da CNH' },
   { id: 'cassacao-cnh', label: 'Cassação da CNH' },
   { id: 'veiculo-clonado', label: 'Veículo clonado' },
-  { id: 'curso-especializado', label: 'Curso especializado' },
-  { id: 'consultoria', label: 'Consultoria de trânsito' },
-  { id: 'outro', label: 'Outro' },
+  { id: 'curso-especializado', label: 'Cursos especializados' },
+  { id: 'consultoria', label: 'Consultoria em trânsito' },
+  { id: 'outro', label: 'Outro assunto de trânsito' },
 ] as const;
 
 export const PRINCIPLES: PrincipleItem[] = [

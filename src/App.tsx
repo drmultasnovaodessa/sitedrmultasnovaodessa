@@ -23,6 +23,8 @@ export default function App() {
     descricao: '',
   });
 
+  const [currentStep, setCurrentStep] = useState<number>(1);
+
   const scrollToDiagnostic = () => {
     const diagnosticEl = document.getElementById('diagnostico');
     if (diagnosticEl) {
@@ -30,20 +32,34 @@ export default function App() {
     }
   };
 
+  // General Diagnostic Button: Opens diagnostic with NO service pre-selected
+  const handleStartGeneralDiagnostic = () => {
+    setFormData((prev) => ({ ...prev, servico: '' }));
+    setCurrentStep(1);
+    scrollToDiagnostic();
+  };
+
+  // Specific Service Card Shortcut: Opens diagnostic with that service pre-selected
   const handleSelectServiceForDiagnostic = (serviceId: ServiceId) => {
     setFormData((prev) => ({ ...prev, servico: serviceId }));
+    // If name is already provided, advance directly to step 3, otherwise start at step 1
+    if (formData.nome.trim()) {
+      setCurrentStep(3);
+    } else {
+      setCurrentStep(1);
+    }
     scrollToDiagnostic();
   };
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex flex-col font-sans selection:bg-yellow-400 selection:text-black antialiased">
       {/* Top Header */}
-      <Header onOpenDiagnostic={scrollToDiagnostic} />
+      <Header onOpenDiagnostic={handleStartGeneralDiagnostic} />
 
       {/* Main Content Flow */}
       <main className="flex-1">
         {/* 1. Hero Section */}
-        <Hero onStartDiagnostic={scrollToDiagnostic} />
+        <Hero onStartDiagnostic={handleStartGeneralDiagnostic} />
 
         {/* Transit Road Divider */}
         <RoadDivider variant="dashed" />
@@ -61,13 +77,18 @@ export default function App() {
         <RoadDivider variant="dashed" />
 
         {/* 4. How It Works (Como Funciona) */}
-        <HowItWorksSection onStartDiagnostic={scrollToDiagnostic} />
+        <HowItWorksSection onStartDiagnostic={handleStartGeneralDiagnostic} />
 
         {/* Transit Road Divider */}
         <RoadDivider variant="stripes" />
 
         {/* 5. Interactive Diagnostic Section */}
-        <DiagnosticSection formData={formData} setFormData={setFormData} />
+        <DiagnosticSection
+          formData={formData}
+          setFormData={setFormData}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
 
         {/* Transit Road Divider */}
         <RoadDivider variant="dashed" />
@@ -94,13 +115,13 @@ export default function App() {
         <RoadDivider variant="dashed" />
 
         {/* 10. Final Conversion CTA */}
-        <FinalCtaSection onStartDiagnostic={scrollToDiagnostic} />
+        <FinalCtaSection onStartDiagnostic={handleStartGeneralDiagnostic} />
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Floating WhatsApp Action */}
+      {/* Floating WhatsApp Action Button */}
       <FloatingWhatsApp />
     </div>
   );
