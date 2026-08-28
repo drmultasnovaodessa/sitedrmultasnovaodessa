@@ -1,0 +1,6 @@
+{
+  "name": "DR Multas Nova Odessa",
+  "description": "Recursos de multas, Lei Seca, suspensão e cassação da CNH em Nova Odessa. Conheça os serviços da DR Multas Nova Odessa e faça seu diagnóstico inicial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
