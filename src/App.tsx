@@ -21,8 +21,6 @@ export default function App() {
     nome: '',
     servico: '',
     descricao: '',
-    arquivoNome: '',
-    tempFileUrl: '',
   });
 
   const scrollToDiagnostic = () => {

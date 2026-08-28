@@ -38,6 +38,4 @@ export interface DiagnosticFormData {
   nome: string;
   servico: ServiceId | '';
   descricao: string;
-  arquivoNome?: string;
-  tempFileUrl?: string;
 }
