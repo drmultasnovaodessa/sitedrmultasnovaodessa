@@ -19,9 +19,10 @@ export default function App() {
   // In-memory state only - STRICTLY NO localStorage, sessionStorage, cookies, or backend persistence
   const [formData, setFormData] = useState<DiagnosticFormData>({
     nome: '',
-    whatsapp: '',
     servico: '',
     descricao: '',
+    arquivoNome: '',
+    tempFileUrl: '',
   });
 
   const scrollToDiagnostic = () => {

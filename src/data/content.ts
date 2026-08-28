@@ -27,6 +27,13 @@ export const SERVICES: ServiceItem[] = [
     iconName: 'FileCheck',
   },
   {
+    id: 'analise-multa',
+    title: 'Análise de Multa',
+    shortDescription: 'Análise inicial da situação apresentada pelo condutor para identificar as informações relevantes do caso e orientar os próximos passos.',
+    tag: 'Avaliação Inicial',
+    iconName: 'SearchCheck',
+  },
+  {
     id: 'lei-seca',
     title: 'Lei Seca',
     shortDescription: 'Orientação e atuação em processos relacionados às infrações e procedimentos administrativos decorrentes da Lei Seca.',
@@ -48,6 +55,13 @@ export const SERVICES: ServiceItem[] = [
     iconName: 'ShieldAlert',
   },
   {
+    id: 'veiculo-clonado',
+    title: 'Veículo Clonado',
+    shortDescription: 'Orientação para situações envolvendo suspeita ou identificação de veículo clonado.',
+    tag: 'Orientação Especial',
+    iconName: 'CarFront',
+  },
+  {
     id: 'curso-especializado',
     title: 'Cursos Especializados',
     shortDescription: 'Apresentação e orientação sobre os cursos especializados para condutores oferecidos pela empresa.',
@@ -65,9 +79,11 @@ export const SERVICES: ServiceItem[] = [
 
 export const SERVICE_OPTIONS = [
   { id: 'recurso-multa', label: 'Recurso de multa' },
+  { id: 'analise-multa', label: 'Análise de multa' },
   { id: 'lei-seca', label: 'Lei Seca' },
   { id: 'suspensao-cnh', label: 'Suspensão da CNH' },
   { id: 'cassacao-cnh', label: 'Cassação da CNH' },
+  { id: 'veiculo-clonado', label: 'Veículo clonado' },
   { id: 'curso-especializado', label: 'Curso especializado' },
   { id: 'consultoria', label: 'Consultoria de trânsito' },
   { id: 'outro', label: 'Outro' },
@@ -138,6 +154,6 @@ export const FAQS: FaqItem[] = [
   },
   {
     question: 'Preciso enviar meus documentos pelo site?',
-    answer: 'Não. O diagnóstico inicial não exige envio de CNH, CPF, RG ou fotos de documentos. Caso sejam necessários para análise aprofundada, eles serão solicitados diretamente pelo WhatsApp durante o atendimento.',
+    answer: 'Não. O diagnóstico inicial não exige envio obrigatório de documentos. Você pode anexar uma foto ou notificação opcionalmente no formulário (o arquivo fica apenas temporariamente no seu navegador) ou enviá-la diretamente na conversa do WhatsApp.',
   },
 ];

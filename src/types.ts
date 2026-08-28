@@ -1,8 +1,10 @@
 export type ServiceId =
   | 'recurso-multa'
+  | 'analise-multa'
   | 'lei-seca'
   | 'suspensao-cnh'
   | 'cassacao-cnh'
+  | 'veiculo-clonado'
   | 'curso-especializado'
   | 'consultoria'
   | 'outro';
@@ -12,7 +14,7 @@ export interface ServiceItem {
   title: string;
   shortDescription: string;
   tag: string;
-  iconName: 'FileCheck' | 'Wine' | 'AlertTriangle' | 'ShieldAlert' | 'GraduationCap' | 'Scale';
+  iconName: 'FileCheck' | 'SearchCheck' | 'Wine' | 'AlertTriangle' | 'ShieldAlert' | 'CarFront' | 'GraduationCap' | 'Scale';
 }
 
 export interface PrincipleItem {
@@ -34,7 +36,8 @@ export interface FaqItem {
 
 export interface DiagnosticFormData {
   nome: string;
-  whatsapp: string;
   servico: ServiceId | '';
   descricao: string;
+  arquivoNome?: string;
+  tempFileUrl?: string;
 }

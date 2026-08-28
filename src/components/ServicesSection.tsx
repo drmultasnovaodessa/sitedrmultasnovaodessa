@@ -1,8 +1,10 @@
 import {
   FileText,
+  Search,
   ShieldAlert,
   CreditCard,
   ShieldX,
+  Car,
   GraduationCap,
   Scale,
   ArrowRight,
@@ -20,8 +22,11 @@ export function ServicesSection({ onSelectServiceForDiagnostic }: ServicesSectio
     const iconProps = { className: 'w-6 h-6 stroke-[2.2]' };
     
     // Explicit transit-specific icons based on service type
-    if (serviceId === 'recurso-multas' || iconName === 'FileCheck') {
+    if (serviceId === 'recurso-multa' || iconName === 'FileCheck') {
       return <FileText {...iconProps} />;
+    }
+    if (serviceId === 'analise-multa' || iconName === 'SearchCheck') {
+      return <Search {...iconProps} />;
     }
     if (serviceId === 'lei-seca' || iconName === 'Wine') {
       return <ShieldAlert {...iconProps} />;
@@ -32,7 +37,10 @@ export function ServicesSection({ onSelectServiceForDiagnostic }: ServicesSectio
     if (serviceId === 'cassacao-cnh' || iconName === 'ShieldAlert') {
       return <ShieldX {...iconProps} />; // Cassação / Defesa técnica rigorosa
     }
-    if (serviceId === 'cursos-especializados' || iconName === 'GraduationCap') {
+    if (serviceId === 'veiculo-clonado' || iconName === 'CarFront') {
+      return <Car {...iconProps} />; // Veículo clonado
+    }
+    if (serviceId === 'curso-especializado' || iconName === 'GraduationCap') {
       return <GraduationCap {...iconProps} />; // Cursos e reciclagem
     }
     return <Scale {...iconProps} />; // Consultoria e estratégia
