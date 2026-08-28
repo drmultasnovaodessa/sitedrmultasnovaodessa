@@ -75,10 +75,23 @@ export function Hero({ onStartDiagnostic }: HeroProps) {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.18]">
               Recursos e defesa para quem{' '}
-              <span className="inline-block bg-yellow-400 text-black px-2 py-0.5 rounded-md transform -rotate-1 shadow-md">
-                enfrenta problemas no trânsito.
+              <span className="relative inline-block mt-1 sm:mt-1.5">
+                <span className="inline-block bg-yellow-400 text-black px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-[3px] shadow-md font-black">
+                  enfrenta problemas no trânsito.
+                </span>
+                {/* Subtle minimalist road lane marking under the yellow bar */}
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 left-1 right-1 h-[2px] opacity-40 flex items-center justify-between gap-1 pointer-events-none"
+                >
+                  <span className="h-full w-4 bg-yellow-400 rounded-full" />
+                  <span className="h-full w-4 bg-yellow-400 rounded-full" />
+                  <span className="h-full w-4 bg-yellow-400 rounded-full" />
+                  <span className="h-full w-4 bg-yellow-400 rounded-full" />
+                  <span className="h-full flex-1 bg-yellow-400/40 rounded-full" />
+                </span>
               </span>
             </h1>
 
