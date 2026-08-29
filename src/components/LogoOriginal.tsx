@@ -23,7 +23,7 @@ export function LogoOriginal({
     >
       {/* Optional subtle ambient aura */}
       {showGlow && (
-        <div className="absolute inset-0 rounded-full bg-amber-500/20 blur-md scale-110 pointer-events-none" />
+        <div className="absolute inset-0 rounded-full bg-yellow-400/30 blur-md scale-110 pointer-events-none" />
       )}
 
       <svg
@@ -35,7 +35,7 @@ export function LogoOriginal({
         aria-label="Logo DR. MULTAS Nova Odessa"
       >
         <defs>
-          {/* Rich golden-amber gradient for the circle badge */}
+          {/* Vibrant golden-yellow gradient for the circle badge matching the site's yellow-400 palette */}
           <radialGradient
             id="goldCircleGrad"
             cx="35%"
@@ -44,9 +44,10 @@ export function LogoOriginal({
             fx="30%"
             fy="25%"
           >
-            <stop offset="0%" stopColor="#FFC83B" />
-            <stop offset="55%" stopColor="#F5A623" />
-            <stop offset="100%" stopColor="#E08E0B" />
+            <stop offset="0%" stopColor="#FEF08A" />
+            <stop offset="35%" stopColor="#FACC15" />
+            <stop offset="75%" stopColor="#EAB308" />
+            <stop offset="100%" stopColor="#CA8A04" />
           </radialGradient>
 
           {/* Traffic light lens glows */}
@@ -57,8 +58,8 @@ export function LogoOriginal({
           </radialGradient>
 
           <radialGradient id="yellowLight" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#FEF08A" />
-            <stop offset="70%" stopColor="#EAB308" />
+            <stop offset="0%" stopColor="#FEF9C3" />
+            <stop offset="70%" stopColor="#FACC15" />
             <stop offset="100%" stopColor="#A16207" />
           </radialGradient>
 
@@ -76,8 +77,8 @@ export function LogoOriginal({
 
           {/* Outer Ring Accent */}
           <linearGradient id="ringBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFEBAA" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#B45309" stopOpacity="0.4" />
+            <stop offset="0%" stopColor="#FEF9C3" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#CA8A04" stopOpacity="0.6" />
           </linearGradient>
         </defs>
 
@@ -212,7 +213,7 @@ export function LogoOriginal({
                M 170 192 L 195 192 
                M 210 193 L 235 194
                M 250 193 L 275 192"
-            stroke="#FDE047"
+            stroke="#FACC15"
             strokeWidth="2.5"
             strokeLinecap="round"
           />
